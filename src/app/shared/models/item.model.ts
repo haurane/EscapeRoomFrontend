@@ -1,1 +1,6 @@
-console.log("Hello World!")
+export interface Item {
+  id: number;
+  name: string;
+  description: string;
+
+}

@@ -1,1 +1,6 @@
-console.log("Hello World!")
+export interface Room {
+  id: number
+  name: string
+  description: string
+
+}

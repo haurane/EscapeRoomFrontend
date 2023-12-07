@@ -1,0 +1,4 @@
+<app-stories *ngFor="let story of stories" [story]="story" (selectedStory)="openStoryModal(story)"></app-stories>
+<app-modal id="storiesModal">
+  <app-stories-detail *ngIf="selectedStory" [story]="selectedStory"></app-stories-detail>
+</app-modal>

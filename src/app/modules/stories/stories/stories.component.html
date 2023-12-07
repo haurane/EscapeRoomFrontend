@@ -1,0 +1,4 @@
+<div class="divStory" (click)="selectStory()" (mouseover)="hover = true" (mouseleave)="hover = false" [ngClass]="hover ? 'hovered' : ''">
+  <p class="storyMain">{{ story.title }}</p>
+  <p class="descriptionMain descriptionStory">{{ story.description }}</p>
+</div>
