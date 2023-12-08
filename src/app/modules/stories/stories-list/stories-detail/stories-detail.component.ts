@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Story } from '../../../../shared/models/story.model';
 
 @Component({
@@ -9,5 +9,15 @@ import { Story } from '../../../../shared/models/story.model';
 export class StoriesDetailComponent {
 
   @Input() story!: Story
+  @Output() closeModalEmitter: EventEmitter<void> = new EventEmitter()
+
+  closeModal() {
+    console.log("close Detail")
+    this.closeModalEmitter.emit();
+  }
+
+  startStory() {
+
+  }
 
 }

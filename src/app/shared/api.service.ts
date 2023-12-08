@@ -28,4 +28,8 @@ export class ApiService {
   getRooms(): Observable<Room[]> {
     return of(ROOMS)
   }
+
+  getRoom(id: Number): Observable<Room> {
+    return of(ROOMS[0]);
+  }
 }

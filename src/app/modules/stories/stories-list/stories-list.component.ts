@@ -27,4 +27,9 @@ export class StoriesListComponent implements OnInit {
     this.selectedStory = story;
     this.modalService.open("storiesModal")
   }
+
+  closeStoryModal() {
+    this.selectedStory = undefined;
+    this.modalService.close();
+  }
 }

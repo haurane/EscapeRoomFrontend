@@ -7,6 +7,6 @@ import { ModalService } from './shared/modal.service';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'Escape Room Simulator';
   constructor(protected popupService: ModalService) { }
 }

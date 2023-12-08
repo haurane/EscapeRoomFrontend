@@ -1,1 +1,13 @@
-<p>rooms works!</p>
+<div class="columns">
+  <div class="column is-one-fifth">Lorem</div>
+  <div class="column is-three-fifth">
+    <p>{{room.name}}</p>
+    <p>{{room.description}}</p>
+    <h2>Inspect</h2>
+
+    <ul>
+      <li *ngFor="let object of staticObjects">{{object.name}}</li>
+    </ul>
+  </div>
+  <div class="column is-one-fifth">Inventory</div>
+</div>
