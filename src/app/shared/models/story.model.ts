@@ -1,7 +1,8 @@
 export interface Story {
-  id: number;
+  id: string;
   title: string;
   description: string;
   intro: string;
+  firstRoom: string;
 
 }

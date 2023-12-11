@@ -8,6 +8,12 @@
     <ul>
       <li *ngFor="let object of staticObjects">{{object.name}}</li>
     </ul>
+    <div>
+      <button (click)="addItem()">Add item</button>
+      <button (click)="addItem2()">Add item2</button>
+      <button (click)="removeItem()">rem item</button>
+      <button (click)="removeItem2()">rem item2</button>
+    </div>
   </div>
   <div class="column is-one-fifth">Inventory</div>
 </div>

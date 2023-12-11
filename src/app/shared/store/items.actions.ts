@@ -1,10 +1,11 @@
 import { createAction, createActionGroup, props } from '@ngrx/store'
+import { Item } from '../models/item.model'
 
 export const ItemActions = createActionGroup({
   source: "Items",
   events: {
-    "addItem": props<{ itemId: string }>(),
-    "removeItem": props<{itemId: string}>(),
+    "addItem": props<{ item: Item }>(),
+    "removeItem": props<{item: Item}>(),
   }
 })
 

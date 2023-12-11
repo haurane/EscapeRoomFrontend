@@ -4,6 +4,7 @@ import { ModalComponent } from './modal/modal.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component'
 import { StoreModule } from '@ngrx/store';
+import { itemReducer } from './store/items.reducer';
 
 
 
@@ -15,7 +16,7 @@ import { StoreModule } from '@ngrx/store';
   ],
   imports: [
     CommonModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({ items: itemReducer }, {}),
   ],
   exports: [
     ModalComponent,
