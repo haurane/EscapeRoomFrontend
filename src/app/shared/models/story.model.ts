@@ -3,6 +3,9 @@ export interface Story {
   title: string;
   description: string;
   intro: string;
-  firstRoom: string;
+  startingRoom: [{
+    name: string;
+    uuid: string;
+  }];
 
 }

@@ -19,7 +19,11 @@ export class StoriesListComponent implements OnInit {
   selectedStory?: Story;
 
   ngOnInit() {
-    this.apiService.getStories().subscribe(stories => this.stories = stories)
+    this.apiService.getStories().subscribe({
+      next: (stories) => {
+        this.stories = stories
+      }, error: (err) => { console.log(err) }
+    });
   }
 
   openStoryModal(story?: Story) {

@@ -6,7 +6,7 @@
     <h2>Inspect</h2>
 
     <ul>
-      <li *ngFor="let object of staticObjects">{{object.name}}</li>
+      <li *ngFor="let object of room.containedObjects">{{object.name}}<button (click)="inspectStatObj(object.uuid)">Inspect</button></li>
     </ul>
     <div>
       <button (click)="addItem()">Add item</button>
