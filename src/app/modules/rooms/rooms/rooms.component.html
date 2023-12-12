@@ -1,19 +1,19 @@
 <div class="columns">
   <div class="column is-one-fifth">Lorem</div>
   <div class="column is-three-fifth">
-    <p>{{room.name}}</p>
-    <p>{{room.description}}</p>
-    <h2>Inspect</h2>
-
-    <ul>
-      <li *ngFor="let object of room.containedObjects">{{object.name}}<button (click)="inspectStatObj(object.uuid)">Inspect</button></li>
-    </ul>
-    <div>
-      <button (click)="addItem()">Add item</button>
-      <button (click)="addItem2()">Add item2</button>
-      <button (click)="removeItem()">rem item</button>
-      <button (click)="removeItem2()">rem item2</button>
+    <div class="room">
+      <h2>{{room.name}}</h2>
+      <div class="roomDescription" [innerHtml]="room.description"></div>
+      <div class="roomStatObj">
+        <h2>Inspect</h2>
+        <ul>
+          <li *ngFor="let object of room.containedObjects" (mouseover)="hover = true" (mouseleave)="hover = false" [ngClass]="hover ? 'hovered' : ''">{{object.name}} <button (click)="inspectStatObj(object.uuid)">Inspect</button></li>
+        </ul>
+      </div>
     </div>
   </div>
   <div class="column is-one-fifth">Inventory</div>
 </div>
+<app-modal id="StaticObjectModal">
+  <app-static-object-detail></app-static-object-detail>
+</app-modal>

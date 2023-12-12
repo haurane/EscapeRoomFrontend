@@ -1,0 +1,23 @@
+h2{
+    font-weight: bold;
+    font-variant-caps: small-caps;
+    font-size: larger;
+    margin-bottom: 7px;
+}
+
+.roomDescription{
+    margin-bottom: 1em;
+}
+
+button{
+
+}
+
+/*li {
+  background-color: lightgray;
+
+}
+  li.hovered {
+    background-color: gray;
+  }
+    */

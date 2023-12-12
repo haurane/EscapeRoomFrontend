@@ -6,6 +6,8 @@ import { RoomDetailComponent } from './room-list/room-detail/room-detail.compone
 import { RoomCreateComponent } from './room-create/room-create.component';
 import { RoomsRoutingModule } from './rooms-routing.module';
 import { SharedModule } from '../../shared/shared.module';
+import { ItemsModule } from '../items/items.module';
+import { StaticObjectsModule } from '../static-objects/static-objects.module';
 
 
 
@@ -20,6 +22,8 @@ import { SharedModule } from '../../shared/shared.module';
     CommonModule,
     RoomsRoutingModule,
     SharedModule,
+    ItemsModule,
+    StaticObjectsModule,
   ]
 })
 export class RoomsModule { }

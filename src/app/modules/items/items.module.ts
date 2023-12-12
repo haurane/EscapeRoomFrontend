@@ -18,6 +18,9 @@ import { ItemsRoutingModule } from './items-routing.module';
   imports: [
     CommonModule,
     ItemsRoutingModule
+  ],
+  exports: [
+    ItemsComponent
   ]
 })
 export class ItemsModule { }

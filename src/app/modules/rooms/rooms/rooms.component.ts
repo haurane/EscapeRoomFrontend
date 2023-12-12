@@ -18,6 +18,8 @@ export class RoomsComponent implements OnInit {
   testItem: Item = { name: 'Test Item', description: 'TestItem', id: "1" }
   testItem2: Item = { name: 'Test Item2', description: 'TestItem2', id: "2" }
   roomId: string;
+  safeHtml = "<p>Error Displaying HTML</p>"
+  hover: boolean = false;
   constructor(private apiService: ApiService, private modalService: ModalService, private store: Store, private router: Router) {
     const navi = this.router.getCurrentNavigation();
     const state = navi?.extras.state as { roomId: string }
@@ -51,6 +53,7 @@ export class RoomsComponent implements OnInit {
   }
 
   inspectStatObj(uuid: string) {
+    this.modalService.open("StaticObjectModal")
     console.log(uuid)
   }
 
