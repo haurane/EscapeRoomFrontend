@@ -30,4 +30,8 @@ export class ApiService {
   getRoom(id: String): Observable<any> {
     return this.http.get(environment.backendUrl + 'rooms/'+id)
   }
+
+  getObjectsOfRoom(id: String): Observable<any> {
+    return this.http.get(environment.backendUrl + 'staticobjects/' + id + '/contained')
+  }
 }

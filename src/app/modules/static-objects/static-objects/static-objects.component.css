@@ -1,0 +1,19 @@
+.divStatObj {
+  margin: 10px 0px 10px 0px;
+  border-style: solid;
+  border-width: thin;
+  background-color: lightgray;
+  border-radius: 4px;
+  padding: 0 10px;
+}
+
+.descriptionStory {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.divStatObj.hovered {
+  cursor: pointer;
+  background-color: gray;
+}

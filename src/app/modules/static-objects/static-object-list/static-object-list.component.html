@@ -1,1 +1,1 @@
-<p>static-object-list works!</p>
+<app-static-objects *ngFor="let object of objects" [object]="object" (inspectedObject)="inspectObject($event)"></app-static-objects>

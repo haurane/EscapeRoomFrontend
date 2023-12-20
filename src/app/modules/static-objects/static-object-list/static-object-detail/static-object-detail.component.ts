@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { StaticObject } from '../../../../shared/models/static-object.model';
 
 @Component({
   selector: 'app-static-object-detail',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './static-object-detail.component.css'
 })
 export class StaticObjectDetailComponent {
+  @Input() object!: StaticObject;
 
 }

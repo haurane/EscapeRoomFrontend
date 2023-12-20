@@ -1,1 +1,9 @@
-<p>static-object-detail works!</p>
+<h1>{{object.name}}</h1>
+<div [innerHTML]="object.description"></div>
+<div *ngIf="!object.isLocked; else lockedBlock">
+  <h2>Items</h2>
+
+</div>
+<ng-template #lockedBlock>
+  <p>The {{object.name}} is locked. Unlock it with a <span *ngIf="object.combination"> password or </span><span *ngIf="object.requiredItems">item</span></p>
+</ng-template>

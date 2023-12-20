@@ -16,7 +16,10 @@ footer{
     right: 0px;
 }
 .storyMain {
-
   font-weight: bold;
   font-variant-caps: small-caps
+}
+
+.no-padding {
+  padding: 0;
 }

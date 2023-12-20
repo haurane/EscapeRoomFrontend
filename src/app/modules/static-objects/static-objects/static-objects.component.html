@@ -1,1 +1,3 @@
-<p>static-objects works!</p>
+<div class="divStatObj" (click)="inspectObject()" (mouseover)="hover = true" (mouseleave)="hover = false" [ngClass]="hover ? 'hovered' : ''">
+  <div>{{object.name}}</div>
+</div>

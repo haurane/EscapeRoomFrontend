@@ -20,6 +20,8 @@ import { StaticObjectCreateComponent } from './static-object-create/static-objec
   ],
   exports: [
     StaticObjectDetailComponent,
+    StaticObjectListComponent,
+    //StaticObjectsComponent,
   ]
 })
 export class StaticObjectsModule { }

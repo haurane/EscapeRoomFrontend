@@ -6,6 +6,7 @@ import { Item } from '../../../shared/models/item.model';
 import { Store } from '@ngrx/store';
 import { ItemActions } from '../../../shared/store/items.actions';
 import { Router } from '@angular/router';
+import { StaticObject } from '../../../shared/models/static-object.model';
 
 @Component({
   selector: 'app-rooms',
@@ -14,7 +15,10 @@ import { Router } from '@angular/router';
 })
 export class RoomsComponent implements OnInit {
 
+  
   room!: Room;
+  containedObjects?: StaticObject[];
+  inspectedObject!: StaticObject;
   testItem: Item = { name: 'Test Item', description: 'TestItem', id: "1" }
   testItem2: Item = { name: 'Test Item2', description: 'TestItem2', id: "2" }
   roomId: string;
@@ -31,30 +35,23 @@ export class RoomsComponent implements OnInit {
     //var roomId = this.router.getCurrentNavigation()?.extras.state.roomId;
     console.log(this.roomId)
     this.apiService.getRoom(this.roomId).subscribe(room => this.room = room);
-    
+    this.apiService.getObjectsOfRoom(this.roomId).subscribe(objects => this.containedObjects = objects);
+    console.log(this.containedObjects)
 
   }
 
   addItem() {
-    console.log('add1')
-    this.store.dispatch(ItemActions.addItem({item:this.testItem}))
-  }
-  addItem2() {
-    console.log('add2')
-    this.store.dispatch(ItemActions.addItem({ item: this.testItem2 }))
-  }
-  removeItem() {
-    console.log('re1')
-    this.store.dispatch(ItemActions.removeItem({ item: this.testItem }))
-  }
-  removeItem2() {
-    console.log('re2')
-    this.store.dispatch(ItemActions.removeItem({ item: this.testItem2 }))
+    console.log(this.containedObjects)
   }
 
   inspectStatObj(uuid: string) {
     this.modalService.open("StaticObjectModal")
     console.log(uuid)
+  }
+
+  inspectObject(object: StaticObject) {
+    this.inspectedObject = object;
+    this.modalService.open("StaticObjectModal")
   }
 
 }
