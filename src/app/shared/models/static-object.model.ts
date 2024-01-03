@@ -2,7 +2,7 @@ export interface StaticObject {
   id: string
   name: string
   description: string
-  isLocked: boolean
+  locked: boolean
   combination: [
     string
   ]

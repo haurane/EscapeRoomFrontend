@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { ItemActions } from '../../../shared/store/items.actions';
 import { Router } from '@angular/router';
 import { StaticObject } from '../../../shared/models/static-object.model';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-rooms',
@@ -24,6 +25,7 @@ export class RoomsComponent implements OnInit {
   roomId: string;
   safeHtml = "<p>Error Displaying HTML</p>"
   hover: boolean = false;
+  loaded: boolean = false;
   constructor(private apiService: ApiService, private modalService: ModalService, private store: Store, private router: Router) {
     const navi = this.router.getCurrentNavigation();
     const state = navi?.extras.state as { roomId: string }
@@ -33,21 +35,20 @@ export class RoomsComponent implements OnInit {
 
   ngOnInit() {
     //var roomId = this.router.getCurrentNavigation()?.extras.state.roomId;
-    console.log(this.roomId)
-    this.apiService.getRoom(this.roomId).subscribe(room => this.room = room);
-    this.apiService.getObjectsOfRoom(this.roomId).subscribe(objects => this.containedObjects = objects);
-    console.log(this.containedObjects)
+    console.log(this.roomId);
+    const getRoom = this.apiService.getRoom(this.roomId);
+    const getObjects = this.apiService.getObjectsOfRoom(this.roomId);
+    forkJoin([getRoom, getObjects]).subscribe(
+      result => {
+        this.room = result[0];
+        this.containedObjects = result[1];
+        this.loaded = true;
+        console.log(this.loaded);
+      }
+    )
 
   }
 
-  addItem() {
-    console.log(this.containedObjects)
-  }
-
-  inspectStatObj(uuid: string) {
-    this.modalService.open("StaticObjectModal")
-    console.log(uuid)
-  }
 
   inspectObject(object: StaticObject) {
     this.inspectedObject = object;

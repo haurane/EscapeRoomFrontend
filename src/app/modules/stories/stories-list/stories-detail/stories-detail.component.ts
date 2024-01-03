@@ -15,7 +15,7 @@ export class StoriesDetailComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.startingRoomId = this.story.startingRoom[0].uuid
+    this.startingRoomId = this.story.startingRoomId;
   }
 
   closeModal() {
@@ -24,6 +24,7 @@ export class StoriesDetailComponent implements OnInit {
   }
 
   startStory() {
+    console.log(this.startingRoomId);
     this.router.navigate(['/room'], { state: { roomId: this.startingRoomId } })
   }
 

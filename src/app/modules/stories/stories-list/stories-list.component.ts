@@ -17,11 +17,13 @@ export class StoriesListComponent implements OnInit {
 
   stories: Story[] = []
   selectedStory?: Story;
+  loaded: Boolean = false;
 
   ngOnInit() {
     this.apiService.getStories().subscribe({
       next: (stories) => {
-        this.stories = stories
+        this.stories = stories;
+        this.loaded = true;
       }, error: (err) => { console.log(err) }
     });
   }

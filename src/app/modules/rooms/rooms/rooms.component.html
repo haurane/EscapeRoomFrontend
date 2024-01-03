@@ -1,7 +1,11 @@
+
 <div class="columns">
   <div class="column is-one-fifth">Lorem</div>
   <div class="column is-three-fifth">
-    <div class="room content">
+    <div *ngIf="!loaded; else roomContent">
+      <progress class="progress is-info"></progress>
+    </div>
+    <ng-template #roomContent class="room content">
       <div>
         <h2>{{room.name}}</h2>
         <div class="roomDescription" [innerHtml]="room.description"></div>
@@ -10,10 +14,10 @@
         <h2>Inspect</h2>
         <app-static-object-list [objects]="containedObjects" (inspectedObject)="inspectObject($event)"></app-static-object-list>
       </div>
-    </div>
+    </ng-template>
   </div>
   <div class="column is-one-fifth">Inventory</div>
 </div>
 <app-modal id="StaticObjectModal">
-  <app-static-object-detail [object]="inspectedObject"></app-static-object-detail>
+  <app-static-object-detail *ngIf="inspectedObject" [object]="inspectedObject"></app-static-object-detail>
 </app-modal>
