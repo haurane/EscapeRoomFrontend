@@ -5,6 +5,9 @@ import { StaticObjectDetailComponent } from './static-object-list/static-object-
 import { StaticObjectListComponent } from './static-object-list/static-object-list.component';
 import { StaticObjectsComponent } from './static-objects/static-objects.component';
 import { StaticObjectCreateComponent } from './static-object-create/static-object-create.component';
+import { ItemsModule } from '../items/items.module';
+import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../../shared/shared.module';
 
 
 
@@ -16,7 +19,10 @@ import { StaticObjectCreateComponent } from './static-object-create/static-objec
     StaticObjectsComponent],
   imports: [
     CommonModule,
-    StaticObjectsRoutingModule
+    FormsModule,
+    StaticObjectsRoutingModule,
+    ItemsModule,
+    SharedModule,
   ],
   exports: [
     StaticObjectDetailComponent,

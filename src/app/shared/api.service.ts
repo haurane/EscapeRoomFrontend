@@ -6,6 +6,7 @@ import { Item } from './models/item.model';
 import { Room } from './models/room.model';
 import { environment } from '../../environments/environment.development'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { UnlockDTO } from './models/unlock.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,11 +28,21 @@ export class ApiService {
     return this.http.get(environment.backendUrl + 'stories/', this.httpOptions)
   }
 
-  getRoom(id: String): Observable<any> {
-    return this.http.get(environment.backendUrl + 'rooms/'+id)
+  getRoom(id: String): Observable<Room> {
+    return this.http.get<Room>(environment.backendUrl + 'rooms/'+id)
   }
 
-  getObjectsOfRoom(id: String): Observable<any> {
-    return this.http.get(environment.backendUrl + 'staticobjects/' + id + '/contained')
+  getObjectsOfRoom(id: String): Observable<StaticObject[]> {
+    return this.http.get < StaticObject[]>(environment.backendUrl + 'staticobjects/' + id + '/contained')
+  }
+
+  getItemsOfObject(id: String): Observable<any> {
+    return this.http.get(environment.backendUrl + 'items/' + id + '/held')
+  }
+
+  unlockStaticObject(dto: UnlockDTO): Observable<Item[]> {
+    const body = JSON.stringify(dto);
+    console.log(body);
+    return this.http.post<Item[]>(environment.backendUrl + 'staticobjects/' + dto.uuid + '/unlock', body, this.httpOptions)
   }
 }

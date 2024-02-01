@@ -10,7 +10,7 @@ import { Item } from '../../../shared/models/item.model';
 export class StaticObjectsComponent {
 
   hover: boolean = false
-  @Input() object!: StaticObject;
+  @Input() object?: StaticObject;
   @Output() inspectedObject: EventEmitter<StaticObject> = new EventEmitter();
 
   inspectObject() {

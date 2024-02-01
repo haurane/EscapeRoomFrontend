@@ -1,5 +1,5 @@
 export interface Room {
-  id: string
+  uuid: string
   name: string
   description: string
   containedObjects: [

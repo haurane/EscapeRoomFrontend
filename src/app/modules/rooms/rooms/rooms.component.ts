@@ -3,11 +3,14 @@ import { ApiService } from '../../../shared/api.service';
 import { ModalService } from '../../../shared/modal.service';
 import { Room } from '../../../shared/models/room.model';
 import { Item } from '../../../shared/models/item.model';
-import { Store } from '@ngrx/store';
-import { ItemActions } from '../../../shared/store/items.actions';
+import { Store, select } from '@ngrx/store';
+import { ItemAction } from '../../../store/actions/items.actions';
 import { Router } from '@angular/router';
 import { StaticObject } from '../../../shared/models/static-object.model';
-import { forkJoin } from 'rxjs';
+import { Observable, forkJoin, of } from 'rxjs';
+import * as fromStore from '../../../store';
+import { LoadRoom } from '../../../store/actions/rooms.action';
+import { LoadStaticObjectsOfRoom } from '../../../store/actions/staticobjects.actions';
 
 @Component({
   selector: 'app-rooms',
@@ -16,43 +19,34 @@ import { forkJoin } from 'rxjs';
 })
 export class RoomsComponent implements OnInit {
 
-  
-  room!: Room;
-  containedObjects?: StaticObject[];
+
+  room$: Observable<Room>;
+  //containedObjects$: Observable<StaticObject[]>;
   inspectedObject!: StaticObject;
-  testItem: Item = { name: 'Test Item', description: 'TestItem', id: "1" }
-  testItem2: Item = { name: 'Test Item2', description: 'TestItem2', id: "2" }
   roomId: string;
   safeHtml = "<p>Error Displaying HTML</p>"
   hover: boolean = false;
-  loaded: boolean = false;
-  constructor(private apiService: ApiService, private modalService: ModalService, private store: Store, private router: Router) {
+  loaded: boolean = true;
+  inventory$: Observable<Item[]>;
+
+  CO$: Observable<string[]> = of([])
+
+
+  constructor(private apiService: ApiService, private modalService: ModalService, private store: Store<fromStore.fromReducers.EscapeRoomState>, private router: Router) {
     const navi = this.router.getCurrentNavigation();
     const state = navi?.extras.state as { roomId: string }
     this.roomId = state.roomId;
-    console.log(state)
+    this.room$ = this.store.select(fromStore.fromSelectors.getRoomById(this.roomId))
+    this.inventory$ = this.store.select(fromStore.fromSelectors.getInventory)
 }
 
   ngOnInit() {
-    //var roomId = this.router.getCurrentNavigation()?.extras.state.roomId;
-    console.log(this.roomId);
-    const getRoom = this.apiService.getRoom(this.roomId);
-    const getObjects = this.apiService.getObjectsOfRoom(this.roomId);
-    forkJoin([getRoom, getObjects]).subscribe(
-      result => {
-        this.room = result[0];
-        this.containedObjects = result[1];
-        this.loaded = true;
-        console.log(this.loaded);
-      }
-    )
-
+    this.store.dispatch(new LoadRoom(this.roomId));
+    this.store.dispatch(new LoadStaticObjectsOfRoom(this.roomId));
   }
 
-
-  inspectObject(object: StaticObject) {
-    this.inspectedObject = object;
-    this.modalService.open("StaticObjectModal")
+  removeFromInventory(item: Item) {
+    this.store.dispatch(new fromStore.fromActions.RemoveItemInventory(item))
   }
-
+  
 }

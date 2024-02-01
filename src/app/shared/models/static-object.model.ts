@@ -1,5 +1,5 @@
 export interface StaticObject {
-  id: string
+  uuid: string
   name: string
   description: string
   locked: boolean

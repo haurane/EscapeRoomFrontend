@@ -13,7 +13,6 @@ export class StoriesComponent implements OnInit {
   hover: boolean = false;
 
   ngOnInit() {
-    console.log(this.story)
   }
 
   selectStory() {

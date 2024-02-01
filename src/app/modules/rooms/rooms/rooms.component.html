@@ -1,23 +1,29 @@
 
 <div class="columns">
-  <div class="column is-one-fifth">Lorem</div>
+  <div class="column is-one-fifth">
+    Lorem
+  </div>
   <div class="column is-three-fifth">
     <div *ngIf="!loaded; else roomContent">
       <progress class="progress is-info"></progress>
     </div>
     <ng-template #roomContent class="room content">
-      <div>
+      <div *ngIf="room$ | async as room">
         <h2>{{room.name}}</h2>
         <div class="roomDescription" [innerHtml]="room.description"></div>
-      </div>
-      <div class="roomStatObj">
         <h2>Inspect</h2>
-        <app-static-object-list [objects]="containedObjects" (inspectedObject)="inspectObject($event)"></app-static-object-list>
+        <app-static-object-list [roomId]="room.uuid"></app-static-object-list>
       </div>
     </ng-template>
+    
   </div>
-  <div class="column is-one-fifth">Inventory</div>
+  <div class="column is-one-fifth">
+    <p>Inventory</p>
+    <div *ngFor="let item of (inventory$ | async)">
+      {{item.name}}
+      <button (click)="removeFromInventory(item)">-</button>
+    </div>
+  </div>
+
 </div>
-<app-modal id="StaticObjectModal">
-  <app-static-object-detail *ngIf="inspectedObject" [object]="inspectedObject"></app-static-object-detail>
-</app-modal>
+
