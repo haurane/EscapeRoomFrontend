@@ -17,6 +17,14 @@ export class ItemEffects {
       )
     )
   )
-    
   )
+
+  addItemsOfUnlock$ = createEffect(() => this.actions$.pipe(
+    ofType(fromActions.UNLOCK_STATICOBJECT_SUCCESS),
+    map((action: fromActions.UnlockStaticObjectSuccess) => action.payload.items),
+    map(items => new fromActions.LoadItemsSuccess(items))
+  )
+  )
+
+
 }

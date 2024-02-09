@@ -19,3 +19,16 @@ export const getHeldItemsOfStaticObject = (id: string) => createSelector(
   ((itemIds, entities) => itemIds.map(id => entities[id]))
 )
 
+export const getLoaded = createSelector(
+  fromStaticObjects.getStaticObjectLoaded,
+  fromItems.getItemsLoaded,
+  fromRooms.getRoomLoaded,
+  (objects, items, rooms) => { return objects && items && rooms }
+)
+
+export const getLoading = createSelector(
+  fromStaticObjects.getStaticObjectLoading,
+  fromItems.getItemsLoading,
+  fromRooms.getRoomLoading,
+  (objects, items, rooms) => { return objects || items || rooms }
+)

@@ -50,3 +50,13 @@ export const getItemsIdsOfObject = (id: string) => createSelector(
   getStaticObjectById(id),
   (obj => obj.heldItems.map(value => value.uuid))
 )
+
+export const getStaticObjectLoaded = createSelector(
+  getStaticObjectsState,
+  fromReducers.getStaticObjectLoaded
+)
+
+export const getStaticObjectLoading = createSelector(
+  getStaticObjectsState,
+  fromReducers.getStaticObjectLoading
+)

@@ -1,3 +1,4 @@
+import { from } from "rxjs";
 import { fromActions } from "..";
 import { StaticObject } from "../../shared/models/static-object.model";
 import * as fromStaticObject from "../actions/staticobjects.actions"
@@ -76,6 +77,32 @@ export function staticObjectReducer(
         activeObject: action.payload
       }
     }
+    case (fromActions.UNLOCK_STATICOBJECT): {
+      return {
+        ...state,
+        loading : true
+      }
+    }
+    case (fromActions.UNLOCK_STATICOBJECT_SUCCESS): {
+      console.log(action)
+      const newHeldItems = action.payload.items.map((item) => { return { name: item.name, uuid: item.uuid } })
+      console.log(newHeldItems)
+      const entities = {
+        ...state.entities,
+        [action.payload.uuid]: {
+          ...state.entities[action.payload.uuid],
+          locked: false,
+          heldItems: newHeldItems
+
+        }
+      }
+
+      console.log(entities)
+      return {
+        ...state,
+        entities: entities
+      }
+    }
   }
   
   return state;
@@ -84,3 +111,5 @@ export function staticObjectReducer(
 export const getStaticObjectEntities = (state: StaticObjectState) => state.entities;
 export const getItemsOfObjectLoaded = (state: StaticObjectState) => state.itemsLoaded;
 export const getActiveObject = (state: StaticObjectState) => state.activeObject;
+export const getStaticObjectLoaded = (state: StaticObjectState) => state.loaded;
+export const getStaticObjectLoading = (state: StaticObjectState) => state.loading;

@@ -33,7 +33,7 @@ export class UnlockStaticObject implements Action {
 
 export class UnlockStaticObjectSuccess implements Action {
   readonly type = UNLOCK_STATICOBJECT_SUCCESS;
-  constructor(public payload: string) { }
+  constructor(public payload: { uuid: string, items: Item[] }) { }
 }
 
 export class UnlockStaticObjectFail implements Action {

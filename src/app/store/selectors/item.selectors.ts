@@ -33,3 +33,8 @@ export const getItemListById = (itemIds: string[]) => createSelector(
   getItemEntities,
   (entities => itemIds.map(id => entities[id]))
 )
+
+export const getItemById = (itemId: string) => createSelector(
+  getItemEntities,
+  (items) => { return items[itemId] }
+)

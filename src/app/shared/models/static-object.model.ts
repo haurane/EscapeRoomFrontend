@@ -6,17 +6,12 @@ export interface StaticObject {
   combination: [
     string
   ]
-  heldItems: [
-    {
-      uuid: string,
-      name: string,
-    }
-  ]
-  requiredItems: [
-    {
-      uuid: string,
-      name: string,
-    }
-  ]
+  heldItems: itemSummary[],
+  requiredItems: itemSummary[],
   
+}
+
+export interface itemSummary {
+  uuid: string,
+  name: string,
 }

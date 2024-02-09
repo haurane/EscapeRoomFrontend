@@ -12,9 +12,11 @@ import { Observable, of } from 'rxjs';
   styleUrl: './static-object-detail.component.css'
 })
 export class StaticObjectDetailComponent implements OnInit, OnChanges {
-  heldItems$: Observable<Item[]> = of([]);
+  //heldItems$: Observable<Item[]>;
   inventory$: Observable<Item[]>;
-  @Input() object!: StaticObject;
+  object$: Observable<StaticObject>;
+  @Input() uuid: string = ""
+  loading$: Observable<boolean>;
 
   //tests
   heldItemsId$: Observable<String []> = of([])
@@ -28,6 +30,9 @@ export class StaticObjectDetailComponent implements OnInit, OnChanges {
   constructor(private apiService: ApiService, private store: Store) {
     //this.heldItems$ = this.store.select(fromStore.fromSelectors.getHeldItemsOfStaticObject(this.object.uuid));
     this.inventory$ = this.store.select(fromStore.fromSelectors.getInventory);
+    this.object$ = this.store.select(fromStore.fromSelectors.getStaticObjectById(this.uuid));
+    //this.heldItems$ = this.store.select(fromStore.fromSelectors.getHeldItemsOfStaticObject(this.uuid));
+    this.loading$ = this.store.select(fromStore.fromSelectors.getLoading)
   }
 
   ngOnInit() {
@@ -35,15 +40,19 @@ export class StaticObjectDetailComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log("Change")
     console.log(changes)
-    console.log(this.object.uuid)
-    this.heldItems$ = this.store.select(fromStore.fromSelectors.getHeldItemsOfStaticObject(this.object.uuid));
+    console.log(this.uuid)
+    //this.heldItems$ = this.store.select(fromStore.fromSelectors.getHeldItemsOfStaticObject(this.uuid));
+    this.object$ = this.store.select(fromStore.fromSelectors.getStaticObjectById(this.uuid));
+    this.combinations = []
+    this.unlockItems = []
   }
 
   unlockItem() {
     console.log(this.combinations);
     console.log(this.unlockItems);
-    this.store.dispatch(new fromStore.fromActions.UnlockStaticObject({ uuid: this.object.uuid, combination: this.combinations, items: this.unlockItems }));
+    this.store.dispatch(new fromStore.fromActions.UnlockStaticObject({ uuid: this.uuid, combination: this.combinations, items: this.unlockItems }));
   }
 
   addCombination() {

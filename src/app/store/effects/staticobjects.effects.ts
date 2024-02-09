@@ -26,8 +26,10 @@ export class StaticObjectEffects {
     map((action: fromActions.UnlockStaticObject) => action.payload),
     switchMap((dto) =>
       this.apiService.unlockStaticObject(dto).pipe(
-        map(res => new fromActions.UnlockStaticObjectSuccess(dto.uuid))
+        map(res => new fromActions.UnlockStaticObjectSuccess({ uuid: dto.uuid, items:res }))
       )
     )
   ))
+
+
 }

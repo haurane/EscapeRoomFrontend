@@ -35,6 +35,12 @@ export function itemReducer(
         loading: false,
       }
     }
+    case (fromActions.LOAD_ITEMS_OF_OBJECT): {
+      return {
+        ...state,
+        loading: true,
+      }
+    }
     case (fromActions.LOAD_ITEMS_SUCCESS): {
       const items = action.payload
       const entities = items.reduce(

@@ -1,39 +1,44 @@
-<!--<div *ngIf="object$ | async as object">-->
-  <h1>{{object.name}}</h1>
-  <div [innerHTML]="object.description"></div>
-  <div *ngIf="!object.locked; else lockedBlock">
-    <h2>Items</h2>
-    <div *ngFor="let item of heldItems$ | async">
-      <app-items [item]="item"></app-items>
+<div *ngIf="!(loading$ | async); else loadingBlock">
+  <div *ngIf="object$ | async as object">
+    <h1>{{object.name}}</h1>
+    <div [innerHTML]="object.description"></div>
+    <div *ngIf="!object.locked; else lockedBlock">
+      <h2>Items</h2>
+      <div *ngFor="let item of object.heldItems">
+        <app-items [uuid]="item.uuid"></app-items>
+      </div>
     </div>
+    <ng-template #lockedBlock>
+      <p>The {{object.name}} is locked. Unlock it with a password or item</p>
+      <div>
+        <button (click)="addCombination()">Add Combination</button>
+        <ng-container *ngFor="let combination of combinations; let i=index; trackBy: trackByFn">
+          <p>
+            <input [(ngModel)]="combinations[i]" />
+
+            <button (click)="removeCombination(i)">-</button>
+          </p>
+        </ng-container>
+      </div>
+      <div>
+        <button (click)="addItem()">Add Item</button>
+        <ng-container *ngFor="let unlockItem of unlockItems; let i=index; trackBy: trackByFn">
+          <p>
+            <select [(ngModel)]="unlockItems[i]" [value]="emptyItem">
+              <option [ngValue]="emptyItem">---</option>
+              <option *ngFor="let item of (inventory$ | async)" [ngValue]="item">{{item.name}}</option>
+            </select>
+
+            <button (click)="removeItem(i)">-</button>
+          </p>
+        </ng-container>
+      </div>
+      <div>
+        <button (click)="unlockItem()">Unlock</button>
+      </div>
+    </ng-template>
   </div>
-  <ng-template #lockedBlock>
-    <p>The {{object.name}} is locked. Unlock it with a password or item</p>
-    <div>
-      <button (click)="addCombination()">Add Combination</button>
-      <ng-container *ngFor="let combination of combinations; let i=index; trackBy: trackByFn">
-        <p>
-          <input [(ngModel)]="combinations[i]" />
-
-          <button (click)="removeCombination(i)">-</button>
-        </p>
-      </ng-container>
-    </div>
-    <div>
-      <button (click)="addItem()">Add Item</button>
-      <ng-container *ngFor="let unlockItem of unlockItems; let i=index; trackBy: trackByFn">
-        <p>
-          <select [(ngModel)]="unlockItems[i]" [value]="emptyItem">
-            <option [ngValue]="emptyItem">---</option>
-            <option *ngFor="let item of (inventory$ | async)" [ngValue]="item">{{item.name}}</option>
-          </select>
-
-          <button (click)="removeItem(i)">-</button>
-        </p>
-      </ng-container>
-    </div>
-    <div>
-      <button (click)="unlockItem()">Unlock</button>
-    </div>
-  </ng-template>
-<!--</div>-->
+</div>
+<ng-template #loadingBlock>
+  loading...
+</ng-template>

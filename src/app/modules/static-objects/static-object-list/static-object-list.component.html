@@ -2,5 +2,5 @@
   <app-static-objects *ngFor="let object of objects" [object]="object" (inspectedObject)="inspectObject($event)"></app-static-objects>
 </div>
 <app-modal id="StaticObjectModal">
-  <app-static-object-detail [object]="activeObject"></app-static-object-detail>
+  <app-static-object-detail [uuid]="activeObject.uuid"></app-static-object-detail>
 </app-modal>
