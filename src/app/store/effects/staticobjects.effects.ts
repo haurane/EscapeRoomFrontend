@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { map, switchMap, tap } from "rxjs";
+import { catchError, map, of, switchMap, tap } from "rxjs";
 
 import { ApiService } from "../../shared/api.service";
 
@@ -16,7 +16,7 @@ export class StaticObjectEffects {
     map((action: fromActions.LoadStaticObjectsOfRoom) => action.payload),
     switchMap((id) =>
       this.apiService.getObjectsOfRoom(id).pipe(
-        map(res => new fromActions.LoadStaticObjectOfRoomSuccess( res ))
+        map(res => new fromActions.LoadStaticObjectOfRoomSuccess(res))
       )
     )
   ))
@@ -24,10 +24,12 @@ export class StaticObjectEffects {
   unlockStaticObject$ = createEffect(() => this.actions$.pipe(
     ofType(fromActions.UNLOCK_STATICOBJECT),
     map((action: fromActions.UnlockStaticObject) => action.payload),
-    switchMap((dto) =>
+    switchMap((dto) => 
       this.apiService.unlockStaticObject(dto).pipe(
-        map(res => new fromActions.UnlockStaticObjectSuccess({ uuid: dto.uuid, items:res }))
+        map(res => new fromActions.UnlockStaticObjectSuccess({ uuid: dto.uuid, items: res })),
+        catchError((error) => { console.log(error); return of(new fromActions.UnlockStaticObjectFail(error.error.message)) })
       )
+    
     )
   ))
 

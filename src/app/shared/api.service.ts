@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, catchError, of, throwError } from 'rxjs';
 import { Story } from './models/story.model';
 import { StaticObject } from './models/static-object.model'
 import { Item } from './models/item.model';
 import { Room } from './models/room.model';
-import { environment } from '../../environments/environment.development'
+import { environment } from '../../environments/environment'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UnlockDTO } from './models/unlock.model';
 
@@ -43,6 +43,8 @@ export class ApiService {
   unlockStaticObject(dto: UnlockDTO): Observable<Item[]> {
     const body = JSON.stringify(dto);
     console.log(body);
-    return this.http.post<Item[]>(environment.backendUrl + 'staticobjects/' + dto.uuid + '/unlock', body, this.httpOptions)
+    return this.http
+      .post<Item[]>(environment.backendUrl + 'staticobjects/' + dto.uuid + '/unlock', body, this.httpOptions)
+      .pipe(catchError((error: any) => { console.log(error.error.message); return throwError(error) }))
   }
 }

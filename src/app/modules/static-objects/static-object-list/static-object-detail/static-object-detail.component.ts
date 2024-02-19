@@ -17,6 +17,8 @@ export class StaticObjectDetailComponent implements OnInit, OnChanges {
   object$: Observable<StaticObject>;
   @Input() uuid: string = ""
   loading$: Observable<boolean>;
+  unlockError$: Observable<boolean> = of(false)
+  unlockErrorMessage$: Observable<string>= of("")
 
   //tests
   heldItemsId$: Observable<String []> = of([])
@@ -33,6 +35,8 @@ export class StaticObjectDetailComponent implements OnInit, OnChanges {
     this.object$ = this.store.select(fromStore.fromSelectors.getStaticObjectById(this.uuid));
     //this.heldItems$ = this.store.select(fromStore.fromSelectors.getHeldItemsOfStaticObject(this.uuid));
     this.loading$ = this.store.select(fromStore.fromSelectors.getLoading)
+    this.unlockError$ = this.store.select(fromStore.fromSelectors.getUnlockErrorStatus)
+    this.unlockErrorMessage$ = this.store.select(fromStore.fromSelectors.getUnlockErrorMessage)
   }
 
   ngOnInit() {
@@ -50,9 +54,12 @@ export class StaticObjectDetailComponent implements OnInit, OnChanges {
   }
 
   unlockItem() {
-    console.log(this.combinations);
-    console.log(this.unlockItems);
-    this.store.dispatch(new fromStore.fromActions.UnlockStaticObject({ uuid: this.uuid, combination: this.combinations, items: this.unlockItems }));
+    // Deep Copy array since reference fucks up when sent in Action
+    const sendCombinations = [ ...this.combinations ];
+    const sendItems = [ ...this.unlockItems ];
+    console.log(sendCombinations);
+    console.log(sendItems);
+    this.store.dispatch(new fromStore.fromActions.UnlockStaticObject({ uuid: this.uuid, combination: sendCombinations, items: sendItems }));
   }
 
   addCombination() {

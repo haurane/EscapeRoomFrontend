@@ -100,7 +100,23 @@ export function staticObjectReducer(
       console.log(entities)
       return {
         ...state,
-        entities: entities
+        entities: entities,
+        loaded: true,
+        loading: false,
+      }
+    }
+    case (fromActions.UNLOCK_STATICOBJECT_FAIL): {
+      console.log(action)
+      // TODO: is alert the best way?
+      alert(action.payload)
+      return {
+        ...state,
+        unlockError: {
+          error: true,
+          message: action.payload
+        },
+        loaded: true,
+        loading: false
       }
     }
   }
@@ -113,3 +129,4 @@ export const getItemsOfObjectLoaded = (state: StaticObjectState) => state.itemsL
 export const getActiveObject = (state: StaticObjectState) => state.activeObject;
 export const getStaticObjectLoaded = (state: StaticObjectState) => state.loaded;
 export const getStaticObjectLoading = (state: StaticObjectState) => state.loading;
+export const getUnlockError = (state: StaticObjectState) => state.unlockError;

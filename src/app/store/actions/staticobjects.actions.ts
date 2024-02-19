@@ -38,6 +38,7 @@ export class UnlockStaticObjectSuccess implements Action {
 
 export class UnlockStaticObjectFail implements Action {
   readonly type = UNLOCK_STATICOBJECT_FAIL;
+  constructor(public payload:  string ) { }
 }
 
 export class SelectActiveObject implements Action {

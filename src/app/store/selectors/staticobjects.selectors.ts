@@ -60,3 +60,18 @@ export const getStaticObjectLoading = createSelector(
   getStaticObjectsState,
   fromReducers.getStaticObjectLoading
 )
+
+export const getUnlockError = createSelector(
+  getStaticObjectsState,
+  fromReducers.getUnlockError
+)
+
+export const getUnlockErrorStatus = createSelector(
+  getUnlockError,
+  (err => err.error)
+)
+
+export const getUnlockErrorMessage = createSelector(
+  getUnlockError,
+  (err => err.message)
+)

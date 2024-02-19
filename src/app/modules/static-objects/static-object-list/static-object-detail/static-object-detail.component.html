@@ -10,6 +10,7 @@
     </div>
     <ng-template #lockedBlock>
       <p>The {{object.name}} is locked. Unlock it with a password or item</p>
+      <!--<p *ngIf="unlockError$|async" class="errorMessage">{{unlockErrorMessage$ | async}}</p>-->
       <div>
         <button (click)="addCombination()">Add Combination</button>
         <ng-container *ngFor="let combination of combinations; let i=index; trackBy: trackByFn">
