@@ -24,6 +24,7 @@ export class RoomsComponent implements OnInit {
   //containedObjects$: Observable<StaticObject[]>;
   inspectedObject!: StaticObject;
   roomId: string;
+  introText: string;
   safeHtml = "<p>Error Displaying HTML</p>"
   hover: boolean = false;
   loaded: boolean = true;
@@ -34,8 +35,9 @@ export class RoomsComponent implements OnInit {
 
   constructor(private apiService: ApiService, private modalService: ModalService, private store: Store<fromStore.fromReducers.EscapeRoomState>, private router: Router) {
     const navi = this.router.getCurrentNavigation();
-    const state = navi?.extras.state as { roomId: string }
+    const state = navi?.extras.state as { roomId: string , intro: string}
     this.roomId = state.roomId;
+    this.introText = state.intro;
     this.room$ = this.store.select(fromStore.fromSelectors.getRoomById(this.roomId))
     this.inventory$ = this.store.select(fromStore.fromSelectors.getInventory)
 }
@@ -43,6 +45,7 @@ export class RoomsComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(new LoadRoom(this.roomId));
     this.store.dispatch(new LoadStaticObjectsOfRoom(this.roomId));
+    alert(this.introText)
   }
 
   removeFromInventory(item: Item) {
