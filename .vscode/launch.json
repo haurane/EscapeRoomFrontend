@@ -15,5 +15,13 @@
       "url": "http://localhost:4200",
       "webRoot": "${workspaceFolder}"
     }
+    {
+      "type": "firefox",
+      "request": "launch",
+      "name": "localhost (Firefox)",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}",
+      "firefoxExecutable": "/usr/bin/firefox"
+    }
   ]
 }

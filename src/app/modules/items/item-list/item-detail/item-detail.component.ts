@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Item } from '../../../../shared/models/item.model';
 
 @Component({
   selector: 'app-item-detail',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './item-detail.component.css'
 })
 export class ItemDetailComponent {
+
+  @Input() item!: Item;
 
 }

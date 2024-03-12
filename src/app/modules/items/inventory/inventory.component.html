@@ -1,0 +1,12 @@
+
+<p>Inventory</p>
+<div *ngFor="let item of (inventory$ | async)">
+    {{item.name}}
+    <button (click)="openItemDetail(item)">details</button>
+
+    <button (click)="removeFromInventory(item)">remove</button>
+</div>
+
+<app-modal id="itemModal">
+    <app-item-detail [item]="activeItem"></app-item-detail>
+</app-modal>
