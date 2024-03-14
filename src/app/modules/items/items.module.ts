@@ -5,6 +5,8 @@ import { ItemListComponent } from './item-list/item-list.component';
 import { ItemDetailComponent } from './item-list/item-detail/item-detail.component';
 import { ItemCreateComponent } from './item-create/item-create.component';
 import { ItemsRoutingModule } from './items-routing.module';
+import { InventoryComponent } from './inventory/inventory.component';
+import { SharedModule } from '../../shared/shared.module';
 
 
 
@@ -13,14 +15,17 @@ import { ItemsRoutingModule } from './items-routing.module';
     ItemsComponent,
     ItemListComponent,
     ItemDetailComponent,
-    ItemCreateComponent
+    ItemCreateComponent,
+    InventoryComponent
   ],
   imports: [
     CommonModule,
-    ItemsRoutingModule
+    ItemsRoutingModule,
+    SharedModule
   ],
   exports: [
-    ItemsComponent
+    ItemsComponent,
+    InventoryComponent
   ]
 })
 export class ItemsModule { }

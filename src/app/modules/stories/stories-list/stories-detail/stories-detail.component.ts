@@ -25,7 +25,7 @@ export class StoriesDetailComponent implements OnInit {
 
   startStory() {
     console.log(this.startingRoomId);
-    this.router.navigate(['/room'], { state: { roomId: this.startingRoomId } })
+    this.router.navigate(['/room'], { state: { roomId: this.startingRoomId, intro: this.story.intro } })
   }
 
 }

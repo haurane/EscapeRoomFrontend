@@ -11,9 +11,9 @@ import * as fromStore from '../../../store';
   styleUrl: './items.component.css'
 })
 export class ItemsComponent implements OnChanges {
+
   @Input() uuid!: string;
   item$: Observable<Item>
-
   showDescription: boolean = false;
 
   constructor(private store: Store) {
@@ -28,5 +28,11 @@ export class ItemsComponent implements OnChanges {
 
   addToStore(item: Item) {
     this.store.dispatch(new PutItemInventory(item))
+  }
+
+  toggleDescription() {
+    console.log("toggle")
+    console.log(this.showDescription)
+    this.showDescription = !this.showDescription
   }
 }

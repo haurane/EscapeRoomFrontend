@@ -1,3 +1,10 @@
-<div *ngIf="item$ | async as item">
-  <p>{{item.name}} items works! <button (click)="addToStore(item)">+ </button></p>
+<div class="collapse" *ngIf="item$ | async as item">
+  <div class="collapse-title" (click)="toggleDescription()">
+    <p >{{item.name}}</p>
+  </div>
+  <div [ngClass]="['collapse-content', showDescription? 'shown': 'hidden']">
+    <p>{{item.description}}</p>
+    <p><button (click)="addToStore(item)">Take</button></p>
+  </div>
+  
 </div>
