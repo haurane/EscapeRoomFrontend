@@ -1,5 +1,5 @@
-<progress *ngIf="!loaded" class="progress is-info"></progress>
-<div class="column is-three-fifths is-offset-one-fifth no-padding">
+<progress *ngIf="!loaded"></progress>
+<div>
   <app-stories *ngFor="let story of stories" [story]="story" (selectedStory)="openStoryModal($event)"></app-stories>
 </div>
 <app-modal id="storiesModal">
