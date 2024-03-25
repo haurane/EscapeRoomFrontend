@@ -1,6 +1,8 @@
 # Use the official Node.js image as the base image
 FROM node:18 as build
 
+RUN echo "using dockerfile"
+
 # Set the working directory in the container
 WORKDIR /app
 
@@ -21,6 +23,7 @@ RUN ng build
 FROM nginx:alpine
 
 # Copy the production-ready Angular app to the Nginx webserver's root directory
+COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist/frontend/3rdpartylicenses.txt /usr/share/nginx/html
 COPY --from=build /app/dist/frontend/browser /usr/share/nginx/html
 

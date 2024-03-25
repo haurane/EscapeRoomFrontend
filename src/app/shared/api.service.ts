@@ -17,8 +17,9 @@ export class ApiService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Accept': '*',
-      'Access-Control-Allow-Origin': ['*'],
-      'Access-Control-Allow-Headers': ['*']
+      /**'Access-Control-Allow-Origin': ['*'],
+      'Access-Control-Allow-Headers': ['*'],
+      **/
     })
   }
 
