@@ -8,6 +8,7 @@ import { RoomsRoutingModule } from './rooms-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { ItemsModule } from '../items/items.module';
 import { StaticObjectsModule } from '../static-objects/static-objects.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -24,6 +25,7 @@ import { StaticObjectsModule } from '../static-objects/static-objects.module';
     SharedModule,
     ItemsModule,
     StaticObjectsModule,
+    MatProgressSpinnerModule
   ]
 })
 export class RoomsModule { }

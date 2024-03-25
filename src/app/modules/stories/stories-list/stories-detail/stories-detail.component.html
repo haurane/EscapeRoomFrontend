@@ -1,5 +1,10 @@
-<h1>{{story.title}}</h1>
-<div class="content" [innerHTML]="story.description"></div>
 
-<button (click)='startStory()'>Start</button>
-<button (click)=closeModal()>Back</button>
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<mat-dialog-content>
+    <div [innerHTML]="data.description"></div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-flat-button color="warning" (click)="closeModal()">Close</button>
+    <button mat-flat-button color="primary" (click)="startStory()">Start Story</button>
+</mat-dialog-actions>
+

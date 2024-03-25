@@ -4,7 +4,7 @@ import { ModalComponent } from './modal/modal.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component'
 import { HttpClient, provideHttpClient } from '@angular/common/http';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -15,7 +15,7 @@ import { HttpClient, provideHttpClient } from '@angular/common/http';
   ],
   imports: [
     CommonModule,
-    
+    MatProgressSpinnerModule,
   ],
   exports: [
     ModalComponent,

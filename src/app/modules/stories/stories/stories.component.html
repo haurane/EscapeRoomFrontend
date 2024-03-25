@@ -1,4 +1,14 @@
-<div class="divStory" (click)="selectStory()" (mouseover)="hover = true" (mouseleave)="hover = false" [ngClass]="hover ? 'hovered' : ''">
-  <p class="storyMain">{{ story.title }}</p>
-  <div class="descriptionMain descriptionStory" [innerHTML]="story.description"></div>
-</div>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ story.title }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div [innerHTML]="story.description"></div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-fab extended color="primary" (click)="selectStory()">
+      <mat-icon>start</mat-icon>
+      Start this Story
+    </button>
+  </mat-card-actions>
+</mat-card>

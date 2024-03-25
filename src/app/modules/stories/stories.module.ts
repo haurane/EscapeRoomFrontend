@@ -6,8 +6,11 @@ import { StoriesDetailComponent } from './stories-list/stories-detail/stories-de
 import { StoriesCreateComponent } from './stories-create/stories-create.component';
 import { StoriesRoutingModule } from './stories-routing.module';
 import { SharedModule } from '../../shared/shared.module';
-
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog'
 
 @NgModule({
   declarations: [
@@ -20,6 +23,11 @@ import { SharedModule } from '../../shared/shared.module';
     CommonModule,
     StoriesRoutingModule,
     SharedModule,
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule,
   ],
   exports: [
     StoriesComponent,

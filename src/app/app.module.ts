@@ -11,6 +11,8 @@ import { StoreModule } from '@ngrx/store';
 import { fromReducers } from './store';
 import { EffectsModule } from '@ngrx/effects';
 import { RoomEffects, StaticObjectEffects, effects } from './store/effects';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { LandingpageModule } from './modules/landingpage/landingpage.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,13 +22,16 @@ import { RoomEffects, StaticObjectEffects, effects } from './store/effects';
     AppRoutingModule,
     StoriesModule,
     RoomsModule,
+    LandingpageModule,
     SharedModule,
     StoreModule.forRoot(),
     StoreModule.forFeature("EscapeRoom", fromReducers.reducers),
     EffectsModule.forRoot(effects),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
